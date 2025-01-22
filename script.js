@@ -1,4 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const loader = document.getElementById('loader');
+  const progress = document.getElementById('progress'); // Элемент прогресса
+  const video = document.getElementById('video-background'); // Видео
+
+  // Функция для обновления прогресса
+  function updateProgress(event) {
+    if (event.type === 'progress') {
+      // Обновляем прогресс-бар на основе загруженной части видео
+      const progressWidth = (video.buffered.end(0) / video.duration) * 100;
+      progress.style.width = `${progressWidth}%`;
+    } else if (event.type === 'canplaythrough') {
+      // Когда видео готово к воспроизведению, скрываем лоадер
+      progress.style.width = '100%'; // Убедимся, что прогресс-бар заполнен
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 500); // Задержка для плавного исчезновения
+    }
+  }
+
+  // Отслеживаем прогресс загрузки видео
+  video.addEventListener('progress', updateProgress);
+
+  // Отслеживаем, когда видео готово к воспроизведению
+  video.addEventListener('canplaythrough', updateProgress);
+
+  // Если видео уже загружено, сразу скрываем лоадер
+  if (video.readyState >= 3) { // 3 = HAVE_FUTURE_DATA, 4 = HAVE_ENOUGH_DATA
+    progress.style.width = '100%';
+    loader.style.display = 'none';
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
   const text = "Приглашаю тебя на мой день рождения, который состоится 8 февраля в 19:00 в ресторане Завод. Буду рада видеть тебя на этом празднике!";
   const textElement = document.getElementById("text-content");
   let index = 0;
