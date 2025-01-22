@@ -1,0 +1,367 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Фон для всей страницы (за пределами контейнера) */
+html {
+  background: white; /* или любой другой цвет */
+}
+
+/* Ограничение ширины body и центрирование */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Высота body равна высоте экрана */
+  overflow: hidden; /* Скрываем скролл */
+}
+
+#video-background {
+  filter: saturate(0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 430px;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.content {
+  max-width: 430px;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
+  z-index: 1; /* Контент поверх видео */
+  color: white; /* Цвет текста для примера */
+  text-align: center;
+  padding-top: 20px;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+
+  body {
+    @apply bg-[#efd9ee]; /* Розовый фон через Tailwind */
+  }
+}
+
+/* Конверт */
+.envelope {
+  position: absolute;
+  top: 50%;
+  width: 100%; /* Адаптируем ширину под контейнер */
+  max-width: 300px; /* Максимальная ширина конверта */
+  height: 200px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(179deg, rgb(192 142 195) 0%, rgb(224 35 229) 35%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  border-radius: 15px;
+  animation: slide-in .6s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  0% {
+      right: 100%; /* Начинаем за пределами экрана справа */
+      transform: translateX(0);
+  }
+  100% {
+      right: 50%; /* Перемещаем в центр */
+      transform: translateX(50%);
+  }
+}
+
+/* Верхняя часть конверта (треугольник) */
+.flap {
+  margin: auto;
+  position: relative;
+  top: 2px;
+  left: 0;
+  width: 95%;
+  height: 212px;
+  background: linear-gradient(176deg, rgb(189 128 191) 0%, rgb(241 154 243) 35%);
+  clip-path: polygon(0 0, 100% 0, 50% 50%); /* Основная форма треугольника */
+  transform-origin: top;
+  animation: open-flap 1s ease-in-out 3s forwards;
+  z-index: 3; /* Треугольник выше конверта */
+  overflow: hidden; /* Скрываем лишние части псевдо-элемента */
+}
+
+.flap::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 60px; /* Ширина закругления */
+  height: 60px; /* Высота закругления */
+  background: linear-gradient(86deg, rgb(173 103 177) 0%, rgb(241 154 243) 35%);
+  border-radius: 50%; /* Круглая форма */
+  transform: translate(-50%, 50%); /* Центрирование */
+}
+
+@keyframes open-flap {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+
+/* Письмо */
+.letter {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* Адаптируем ширину под контейнер */
+  max-width: 300px; /* Максимальная ширина письма */
+  height: 300px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  opacity: 0; /* Начальная прозрачность */
+  animation: unfold .9s ease-in-out 10.5s forwards; /* Задержка 3.5 секунды */
+  z-index: 100; /* Письмо выше конверта */
+}
+
+@keyframes unfold {
+  0% {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%) scale(0.1); /* Начальное масштабирование */
+  }
+  50% {
+    opacity: 1;
+    width: 90%; /* Полная ширина */
+    height: 0; /* Высота пока не изменяется */
+    transform: translate(-50%, -50%) scale(1); /* Масштабирование до нормального размера */
+  }
+  100% {
+    opacity: 1;
+    width: 90%; /* Полная ширина */
+    height: 300px; /* Полная высота */
+    transform: translate(-50%, -50%) scale(1); /* Конечное положение */
+  }
+}
+
+/* Анимация текста */
+.text-content {
+  display: inline-block;
+  overflow: hidden;
+  color:#5f5fbb;
+  white-space: pre-wrap;
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  line-height: 1.5;
+  overflow-y: auto;
+  font-family: 'Caveat', cursive; /* Рукописный шрифт */
+}
+
+.video {
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0; /* Сначала видео невидимо */
+  transition: opacity 0.5s ease-in-out; /* Плавное появление */
+}
+
+#gif-image {
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0; /* Сначала видео невидимо */
+  transition: opacity 0.5s ease-in-out; /* Плавное появление */
+}
+
+#counter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13rem;
+  line-height: 13rem;
+  font-weight: bold;
+  font-family: Times, serif;
+  text-align: center;
+  transition: opacity 0.5s ease-in-out;
+
+  /* Основной цвет текста (резервный) */
+  color: #ddcaa0;
+
+  /* Тени для объема */
+  text-shadow:
+    -1px 0 1px #d1c29e,
+    0 1px 1px #dbcca5,
+    5px 5px 10px rgba(8, 8, 8, 0.4),
+    -5px -5px 10px rgba(8, 8, 8, 0.4);
+}
+
+#counter::before {
+  content: attr(data-double); /* Используем значение из data-double */
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  /* Золотой градиент */
+  background: linear-gradient(
+    to bottom,
+    #a19170 14%,
+    #7c6845 16%,
+    #95876a 20%,
+    #938568 22%,
+    #f9e5ab 40%,
+    #58492a 84%
+  );
+
+  -webkit-background-clip: text; /* Обрезаем фон по тексту */
+  background-clip: text;
+  -webkit-text-fill-color: transparent; /* Делаем текст прозрачным */
+  text-shadow: none; /* Убираем тени у псевдоэлемента */
+}
+.img2 {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 290px;
+  opacity: 0; /* Изначально изображение невидимо */
+  transition: opacity 0.5s ease-in-out; /* Плавное появление */
+}
+/* Анимация увеличения и уменьшения */
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1); /* Центрирование + масштаб */
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2); /* Увеличение */
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1); /* Возврат к исходному размеру */
+  }
+}
+
+/* Применяем анимацию к счетчику */
+#counter.pulse {
+  animation: pulse 0.5s ease-in-out; /* Длительность и плавность анимации */
+  transform-origin: center; /* Масштабирование относительно центра */
+}
+.item1{
+  position: fixed;
+  top: 30%;
+  right: -33%;
+  display: none;
+}
+.item2{
+  position: fixed;
+  top: -20%;
+  right: -43%;
+  object-fit: cover;
+  display: none;
+}
+.item3{
+  position: fixed;
+  top: 4%;
+  left: -43%;
+  display: none;
+}
+.item4{
+  position: absolute;
+  bottom: 0;
+  max-width: 430px;
+  display: none;
+}
+.box{
+  position: fixed;
+    height: 100vh;
+    display: none; /* Скрываем блок по умолчанию */
+}
