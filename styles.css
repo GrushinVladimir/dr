@@ -393,3 +393,7 @@ body {
   border-radius: 5px;
   transition: width 0.3s ease;
 }
+.no-animations * {
+  animation: none !important;
+  transition: none !important;
+}
