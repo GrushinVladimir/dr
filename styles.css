@@ -492,13 +492,27 @@ a{
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #53311aa6, #391616c4, #2e0000c2); /* Белый фон */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Убедитесь, что лоадер поверх всех элементов */
-  transition: opacity 0.9s ease-in-out;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+  background: white; /* Белая подложка */
+
 }
+
+#loader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #53311aa6, #391616c4, #2e0000c2); /* Полупрозрачный градиент */
+
+  z-index: -1; /* Помещаем под градиент */
+}
+
 
 #progress-bar {
   width: 50%;
