@@ -2,176 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Базовые стили */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
-/* Фон для всей страницы (за пределами контейнера) */
 html {
-  background: white; /* или любой другой цвет */
+  background: white;
 }
 
-/* Ограничение ширины body и центрирование */
 body {
   background: url('photo_2025-01-24_09-36-29.jpg') no-repeat center center fixed;
   background-size: cover;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  overflow: hidden;
   max-width: 700px;
-  margin: auto;
+  margin: 0 auto;
+  height: 100vh;
+  position: relative;
 }
 
+/* Видео на заднем плане */
 #video-background {
   filter: saturate(0.5);
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   width: 100%;
   max-width: 430px;
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  left: 50%;
   transform: translateX(-50%);
+  will-change: transform;
 }
 
+/* Основной контент */
 .content {
   max-width: 430px;
   margin: 0 auto;
-  height: 100%;
+
   position: relative;
-  z-index: 1; /* Контент поверх видео */
-  color: white; /* Цвет текста для примера */
+  z-index: 1;
+  color: white;
   text-align: center;
   padding-top: 20px;
-}
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
-
-  body {
-    @apply bg-[#efd9ee]; /* Розовый фон через Tailwind */
-  }
 }
 
 /* Конверт */
 .envelope {
   position: absolute;
   top: 50%;
-  width: 100%; /* Адаптируем ширину под контейнер */
-  max-width: 300px; /* Максимальная ширина конверта */
+  width: 100%;
+  max-width: 300px;
   height: 200px;
-  background: rgb(2, 0, 36);
   background: linear-gradient(179deg, rgb(192 142 195) 0%, rgb(224 35 229) 35%);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 2;
   border-radius: 15px;
-  animation: slide-in .6s ease-in-out forwards;
+  animation: slide-in 0.6s ease-in-out forwards;
+  will-change: transform;
 }
 
 @keyframes slide-in {
   0% {
-      right: 100%; /* Начинаем за пределами экрана справа */
-      transform: translateX(0);
+    transform: translateX(100%);
   }
   100% {
-      right: 50%; /* Перемещаем в центр */
-      transform: translateX(50%);
+    transform: translateX(50%);
   }
 }
 
-/* Верхняя часть конверта (треугольник) */
+/* Верхняя часть конверта */
 .flap {
-  margin: auto;
   position: relative;
   top: 2px;
-  left: 0;
   width: 95%;
   height: 212px;
   background: linear-gradient(176deg, rgb(189 128 191) 0%, rgb(241 154 243) 35%);
-  clip-path: polygon(0 0, 100% 0, 50% 50%); /* Основная форма треугольника */
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
   transform-origin: top;
   animation: open-flap 1s ease-in-out 3s forwards;
-  z-index: 3; /* Треугольник выше конверта */
-  overflow: hidden; /* Скрываем лишние части псевдо-элемента */
-}
-
-.flap::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 60px; /* Ширина закругления */
-  height: 60px; /* Высота закругления */
-  background: linear-gradient(86deg, rgb(173 103 177) 0%, rgb(241 154 243) 35%);
-  border-radius: 50%; /* Круглая форма */
-  transform: translate(-50%, 50%); /* Центрирование */
+  z-index: 3;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 @keyframes open-flap {
@@ -183,109 +98,75 @@ body {
   }
 }
 
+/* Письмо */
+.letter {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  height: 300px;
+  background: #9f9f9f;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
+  opacity: 0;
+  animation: unfold 0.9s ease-in-out 10.5s forwards;
+  z-index: 100;
+  will-change: transform, opacity;
+}
 
-
-
-
-  .letter {
-    position: fixed;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%; /* Начальная ширина */
-    height: 300px; /* Начальная высота */
-    background: #9f9f9f;
-    border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: hidden;
-    opacity: 0; /* Начальная прозрачность */
-    animation: unfold 0.9s ease-in-out 10.5s forwards; /* Задержка 10.5 секунд */
-    z-index: 100; /* Письмо выше конверта */
+@keyframes unfold {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
   }
-  
-  @keyframes unfold {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.1); /* Начальное масштабирование */
-    }
-    100% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1); /* Конечное положение */
-    }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
+}
 
-/* Анимация текста */
+/* Текст внутри письма */
 .text-content {
   display: inline-block;
   overflow: hidden;
-  color:rgb(2, 0, 36);
+  color: rgb(2, 0, 36);
   white-space: pre-wrap;
   width: 100%;
   height: 100%;
   font-size: 24px;
   line-height: 1.5;
   overflow-y: auto;
-  font-family: 'Caveat', cursive; /* Рукописный шрифт */
+  font-family: 'Caveat', cursive;
 }
 
-.video {
-  object-fit: cover;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  opacity: 0; /* Сначала видео невидимо */
-  transition: opacity 0.5s ease-in-out; /* Плавное появление */
-}
-
-#gif-image {
-  object-fit: cover;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  opacity: 0; /* Сначала видео невидимо */
-  transition: opacity 0.5s ease-in-out; /* Плавное появление */
-}
-
+/* Счетчик */
 #counter {
   position: absolute;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
   font-size: 13rem;
-  line-height: 13rem;
   font-weight: bold;
   font-family: Times, serif;
-  text-align: center;
-  transition: opacity 0.5s ease-in-out;
   color: #ddcaa0;
   text-shadow:
     -1px 0 1px #d1c29e,
     0 1px 1px #dbcca5,
     5px 5px 10px rgba(8, 8, 8, 0.4),
     -5px -5px 10px rgba(8, 8, 8, 0.4);
+    will-change: transform, opacity;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #counter::before {
-  content: attr(data-double); /* Используем значение из data-double */
+  content: attr(data-double);
   position: absolute;
-  left: 0;
   top: 0;
-  z-index: 1;
+  left: 0;
   width: 100%;
   height: 100%;
-  text-align: center;
-
-  /* Золотой градиент */
   background: linear-gradient(
     to bottom,
     #a19170 14%,
@@ -295,132 +176,45 @@ body {
     #f9e5ab 40%,
     #58492a 84%
   );
-
-  -webkit-background-clip: text; /* Обрезаем фон по тексту */
+  -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent; /* Делаем текст прозрачным */
-  text-shadow: none; /* Убираем тени у псевдоэлемента */
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
-.img2 {
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 290px;
-  opacity: 0; /* Изначально изображение невидимо */
-  transition: opacity 0.5s ease-in-out; /* Плавное появление */
-}
-/* Анимация увеличения и уменьшения */
+
+/* Анимация пульсации */
 @keyframes pulse {
   0% {
-    transform: translate(-50%, -50%) scale(1); /* Центрирование + масштаб */
+    transform: translate(-50%, -50%) scale(1);
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.2); /* Увеличение */
+    transform: translate(-50%, -50%) scale(1.2);
   }
   100% {
-    transform: translate(-50%, -50%) scale(1); /* Возврат к исходному размеру */
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
-/* Применяем анимацию к счетчику */
 #counter.pulse {
-  animation: pulse 0.5s ease-in-out; /* Длительность и плавность анимации */
-  transform-origin: center; /* Масштабирование относительно центра */
-}
-.item1{
-  position: fixed;
-  top: 30%;
-  right: -33%;
-  display: none;
-}
-.item2{
-  position: fixed;
-  top: -20%;
-  right: -43%;
-  object-fit: cover;
-  display: none;
-}
-.item3{
-  position: fixed;
-  top: 4%;
-  left: -43%;
-  display: none;
-}
-.item4{
-  position: absolute;
-  bottom: 0;
-  max-width: 430px;
-  display: none;
-}
-.box{
-  position: fixed;
-    height: 100vh;
-    display: none; /* Скрываем блок по умолчанию */
+  animation: pulse 0.5s ease-in-out;
 }
 
-.bac{
-  opacity: 0; /* Начальная прозрачность */
-  transition: opacity .6s ease-in-out; /* Плавное изменение прозрачности за 2 секунды */
-  position: absolute;
-  height: 100%;
-  object-fit: cover;
-  max-width: 350px;
-  margin: auto;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.bac.visible {
-  opacity: .6; /* Конечная прозрачность */
-}
-.letter, #counter {
-  will-change: transform, opacity;
-}
-/* Стили для кнопки */
+/* Кнопка */
 #button {
   font-size: 1.2rem;
   font-weight: 600;
   font-family: 'Caveat', cursive;
-  text-align: center;
   color: black;
   background: linear-gradient(to bottom, #6b5a39 7%, #7c6845 13%, #95876a 21%, #938568 22%, #f9e5ab 40%, #58492a 84%);
   padding: 20px 40px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  display: inline-block;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  opacity: 0; /* Начальная прозрачность */
-  animation: fadeIn 1s ease-in-out forwards; /* Анимация появления */
-  animation-delay: 15s; /* Задержка 13 секунд */
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 15s forwards;
 }
 
-/* Стили для блока boxs */
-#boxs {
-  bottom: 2rem;
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  opacity: 0; /* Начальная прозрачность */
-  animation: fadeIn 1s ease-in-out forwards; /* Анимация появления */
-  animation-delay: 13s; /* Задержка 11 секунд */
-}
-
-/* Стили для изображения в блоке boxs */
-#boxs img {
-  display: block;
-  margin: auto;
-  max-width: 100px;
-  padding-bottom: 1rem;
-  opacity: 0; /* Начальная прозрачность */
-  animation: rotateAndFadeIn 1s ease-in-out forwards; /* Анимация появления с вращением */
-  animation-delay: 14s; /* Задержка 12 секунд */
-}
-
-/* Анимация появления */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -430,24 +224,142 @@ body {
   }
 }
 
-/* Анимация появления с вращением */
-@keyframes rotateAndFadeIn {
-  from {
-    opacity: 0;
-    transform: rotate(0deg) scale(0.5);
-  }
-  to {
-    opacity: 1;
-    transform: rotate(360deg) scale(1);
-  }
+/* Лоадер */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: white;
+  transition: opacity 0.5s ease-in-out;
 }
-a{
-  translate: none;
-  text-decoration: none;
-  color: #000;
+
+#loader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #53311aa6, #391616c4, #2e0000c2);
+  z-index: -1;
+}
+
+#progress-bar {
+  width: 50%;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(to left, #6f582a 14%, #7c6845 16%, #95876a 20%, #938568 22%, #f9e5ab 40%, #58492a 84%);
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+/* Блоки box и gif-box */
+.box {
+  position: fixed;
+
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  display: none;
+  z-index: 10;
+}
+.bac{
+  position: absolute;
+}
+.gif-box {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.gif-box img,
+.gif-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Салюты */
+.item1 {
+  position: fixed;
+  top: 30%;
+  right: -33%;
+  display: none;
+}
+
+.item2 {
+  position: fixed;
+  top: -20%;
+  right: -43%;
+  object-fit: cover;
+  display: none;
+}
+
+.item3 {
+  position: fixed;
+  top: 4%;
+  left: -43%;
+  display: none;
+}
+
+.item4 {
+  position: absolute;
+  bottom: 0;
+  max-width: 430px;
+  display: none;
+}
+
+/* Картинка Pngtree—golden gift_1646017.png */
+.img2 {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 290px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+/* Стили для блока boxs */
+#boxs {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  max-width: 430px;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 13s;
+  z-index: 10;
+
 }
 .price img{
-  max-width: 100px;
+  max-width: 70px;
+  margin-right: 2rem;
 }
 .price{
   display: flex
@@ -486,47 +398,8 @@ a{
   display: inline-block;
 }
 
-#loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  transition: opacity 0.5s ease-in-out;
-  background: white; /* Белая подложка */
-
-}
-
-#loader::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, #53311aa6, #391616c4, #2e0000c2); /* Полупрозрачный градиент */
-
-  z-index: -1; /* Помещаем под градиент */
-}
-
-
-#progress-bar {
-  width: 50%;
-  height: 10px;
-  background: #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-#progress {
-  width: 0;
-  height: 100%;
-  background: linear-gradient(to left, #6f582a 14%, #7c6845 16%, #95876a 20%, #938568 22%, #f9e5ab 40%, #58492a 84%);
-
-  border-radius: 5px;
-  transition: width 0.3s ease;
+a{
+  translate: none;
+  text-decoration: none;
+  color: #000;
 }
