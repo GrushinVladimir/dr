@@ -1,4 +1,52 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const loader = document.getElementById('loader');
+  const progressBar = document.getElementById('progress');
+  const images = document.querySelectorAll('img');
+  let loadedImages = 0;
+
+  // Функция для обновления прогресс-бара
+  function updateProgress() {
+    loadedImages++;
+    const progress = (loadedImages / images.length) * 100;
+    progressBar.style.width = `${progress}%`;
+
+    // Если все изображения загружены, скрываем лоадер
+    if (loadedImages === images.length) {
+      setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 500); // Задержка перед скрытием лоадера
+      }, 500); // Задержка перед началом исчезновения
+    }
+  }
+
+  // Проверяем, загружены ли изображения
+  images.forEach(img => {
+    if (img.complete) {
+      updateProgress();
+    } else {
+      img.addEventListener('load', updateProgress);
+      img.addEventListener('error', updateProgress); // На случай ошибки загрузки
+    }
+  });
+
+  // Если на странице нет изображений, сразу скрываем лоадер
+  if (images.length === 0) {
+    loader.style.opacity = '0';
+    setTimeout(() => {
+      loader.style.display = 'none';
+    }, 500);
+  }
+});
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
   const text = "Приглашаю тебя на мой день рождения, который состоится 8 февраля В 22:00 Гастропаб ZAVOD г. Минск пр-т Машерова 19. Буду рада видеть тебя на этом празднике!";
   const textElement = document.getElementById("text-content");
   let index = 0;
