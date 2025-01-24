@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
               items[index].style.display = 'block';
               setTimeout(() => {
                 showItemsSequentially(index + 1);
-              }, 1000);
+              }, 100);
             }
 
             showItemsSequentially(0);

@@ -269,7 +269,7 @@ body {
 /* Блоки box и gif-box */
 .box {
   position: fixed;
-
+  top: 60%;
   width: 100%;
   max-width: 430px;
   margin: 0 auto;
