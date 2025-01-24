@@ -143,8 +143,8 @@ body {
 
 /* Счетчик */
 #counter {
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 13rem;
@@ -156,8 +156,10 @@ body {
     0 1px 1px #dbcca5,
     5px 5px 10px rgba(8, 8, 8, 0.4),
     -5px -5px 10px rgba(8, 8, 8, 0.4);
-    will-change: transform, opacity;
-  transition: opacity 0.5s ease-in-out;
+  will-change: transform, opacity; /* Указываем, что будет изменяться */
+  transition: opacity 0.5s ease-in-out; /* Плавное изменение opacity */
+  backface-visibility: hidden; /* Улучшает производительность на iOS */
+  -webkit-font-smoothing: antialiased; /* Сглаживание текста */
 }
 
 #counter::before {

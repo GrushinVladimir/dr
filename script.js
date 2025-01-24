@@ -80,31 +80,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const elapsedTime = Date.now() - startTime;
     const progress = Math.min(elapsedTime / duration, 1);
     currentNumber = Math.floor(targetNumber * easeOutQuad(progress));
-
+  
     if (currentNumber > targetNumber) {
       currentNumber = targetNumber;
     }
-
+  
     counterElement.textContent = currentNumber;
     counterElement.setAttribute('data-double', currentNumber);
-
+  
     if (currentNumber < targetNumber) {
-      requestAnimationFrame(updateCounter);
+      requestAnimationFrame(updateCounter); // Используем requestAnimationFrame для плавности
     } else {
       setTimeout(() => {
         counterElement.classList.add('pulse');
-
+  
         setTimeout(() => {
           if (gifBox) {
             gifBox.style.display = 'flex';
-
+  
             const items = [
               document.querySelector('.item4'),
               document.querySelector('.item2'),
               document.querySelector('.item3'),
               document.querySelector('.item1')
             ];
-
+  
             function showItemsSequentially(index) {
               if (index >= items.length) return;
               items[index].style.display = 'block';
@@ -112,12 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 showItemsSequentially(index + 1);
               }, 100);
             }
-
+  
             showItemsSequentially(0);
-
+  
             setTimeout(() => {
               gifBox.style.display = 'none';
-
+  
               if (bacImage) {
                 fadeIn(bacImage, 3000);
               } else {
@@ -128,9 +128,12 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Элемент gif-box не найден!');
           }
         }, gifShowDelay);
-
+  
         setTimeout(() => {
-          counterElement.style.opacity = '0';
+          counterElement.style.opacity = '0'; // Плавное исчезновение
+          setTimeout(() => {
+            counterElement.style.display = 'none'; // Скрыть элемент после завершения анимации
+          }, 500); // Задержка перед скрытием (должна совпадать с длительностью перехода)
         }, endDelay);
       }, pulseDelay);
     }
