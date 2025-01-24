@@ -156,10 +156,10 @@ body {
     0 1px 1px #dbcca5,
     5px 5px 10px rgba(8, 8, 8, 0.4),
     -5px -5px 10px rgba(8, 8, 8, 0.4);
-  will-change: transform, opacity; /* Указываем, что будет изменяться */
-  transition: opacity 0.5s ease-in-out; /* Плавное изменение opacity */
-  backface-visibility: hidden; /* Улучшает производительность на iOS */
-  -webkit-font-smoothing: antialiased; /* Сглаживание текста */
+  will-change: transform, opacity;
+  transition: opacity 0.5s ease-in-out;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 #counter::before {
@@ -184,22 +184,8 @@ body {
   text-shadow: none;
 }
 
-/* Анимация пульсации */
-@keyframes pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
 
-#counter.pulse {
-  animation: pulse 0.5s ease-in-out;
-}
+
 
 /* Кнопка */
 #button {

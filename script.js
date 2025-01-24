@@ -89,10 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
     counterElement.setAttribute('data-double', currentNumber);
   
     if (currentNumber < targetNumber) {
-      requestAnimationFrame(updateCounter); // Используем requestAnimationFrame для плавности
+      requestAnimationFrame(updateCounter);
     } else {
       setTimeout(() => {
-        counterElement.classList.add('pulse');
+        // Убираем анимацию пульсации
+        // counterElement.classList.add('pulse');
   
         setTimeout(() => {
           if (gifBox) {
