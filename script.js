@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const text = "Приглашаю тебя на мой день рождения, который состоится 8 февраля в 19:00 в ресторане Завод. Буду рада видеть тебя на этом празднике!";
+  const text = "Приглашаю тебя на мой день рождения, который состоится 8 февраля В 22:00 Гастропаб ZAVOD г. Минск пр-т Машерова 19. Буду рада видеть тебя на этом празднике!";
   const textElement = document.getElementById("text-content");
   let index = 0;
 
@@ -20,7 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const img2Element = document.querySelector('.img2');
   const gifBox = document.getElementById('gif-box'); // Блок с GIF-изображениями
   const bacImage = document.querySelector('.bac'); // Изображение, которое нужно показать после gif-box
-
+  counterElement.style.left = '50%';
+  counterElement.style.top = '60%';
+  counterElement.style.transform = 'translate(-50%, -50%)';
   if (!bacImage) {
     console.error('Элемент .bac не найден!');
   }
@@ -111,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Ждем завершения анимации, затем скрываем счетчик и показываем изображение
         setTimeout(() => {
           counterElement.style.opacity = '0'; // Исчезновение цифр
-          img2Element.style.opacity = '1'; // Появление изображения
+        // Появление изображения  img2Element.style.opacity = '1'; 
         }, endDelay);
       }, pulseDelay); // Пауза перед анимацией
     }
