@@ -15,12 +15,14 @@ html {
 
 /* Ограничение ширины body и центрирование */
 body {
-  background: url('photo_2025-01-24_09-36-29.jpg') no-repeat center center fixed; /* Путь к изображению */
-  background-size: cover; /* Растягиваем изображение на весь экран */
+  background: url('photo_2025-01-24_09-36-29.jpg') no-repeat center center fixed;
+  background-size: cover;
   margin: 0;
   padding: 0;
   height: 100vh;
   overflow: hidden;
+  max-width: 700px;
+  margin: auto;
 }
 
 #video-background {
@@ -182,13 +184,17 @@ body {
 }
 
 
+
+
+
+
   .letter {
     position: fixed;
     top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 95%; /* Адаптируем ширину под контейнер */
-    height: 300px;
+    width: 95%; /* Начальная ширина */
+    height: 300px; /* Начальная высота */
     background: #9f9f9f;
     border-radius: 5px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -196,32 +202,20 @@ body {
     box-sizing: border-box;
     overflow: hidden;
     opacity: 0; /* Начальная прозрачность */
-    animation: unfold .9s ease-in-out 10.5s forwards; /* Задержка 3.5 секунды */
+    animation: unfold 0.9s ease-in-out 10.5s forwards; /* Задержка 10.5 секунд */
     z-index: 100; /* Письмо выше конверта */
   }
-
-
-
-@keyframes unfold {
-  0% {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    transform: translate(-50%, -50%) scale(0.1);
+  
+  @keyframes unfold {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.1); /* Начальное масштабирование */
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1); /* Конечное положение */
+    }
   }
-  50% {
-    opacity: 1;
-    width: 95%;
-    height: 0;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 1;
-    width: 95%;
-    height: 300px;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
 
 /* Анимация текста */
 .text-content {
@@ -482,4 +476,43 @@ a{
   translate: none;
   text-decoration: none;
   color: #000;
+}
+.price img{
+  max-width: 100px;
+}
+.price{
+  display: flex
+  ;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 80%;
+      padding: 5%;
+      margin-bottom: 1rem;
+      border-radius: 15px;
+      background: #ffffffa3;
+}
+.box-price{
+  margin: 0;
+  height: 100vh;
+  display: flex
+;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+.box-price p{
+  font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+}
+#txt {
+  font-size: 8rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  text-align: center;
+  color: transparent;
+  background: linear-gradient(to bottom, #a19170 14%, #7c6845 16%, #95876a 20%, #938568 22%, #f9e5ab 40%, #58492a 84%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline-block;
 }
